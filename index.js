@@ -9,13 +9,18 @@ var timesVisited = 0;
 var comments = ['test'];
 
 function addComment(comment) {
-	comments.push(comment);
+	var d = new Date();
+	var newComment = {
+		message: comment['/?message'],
+		time: d.toLocaleTimeString()
+	};
+	comments.push(newComment);
 };
 
 function createCommentString() {
 	var commentListString = '<ul>';
 	for(var i = 0; i < comments.length; i++) {
-			commentListString += '<li>' + comments[i] + '</li>'
+			commentListString += '<li>' + comments[i]['message'] + '<br><i>' +  comments[i]['time'] + '</i> </li>';
 	}
 	commentListString += '</ul><br>';
 	return commentListString;
@@ -24,9 +29,8 @@ function createCommentString() {
 http.createServer(function (request, response) {
 	if (request.url.length > 1) {
 		var obj = querystring.parse(request.url);
-		addComment(obj['/?message']);
+		addComment(obj);
 	}
-	// console.log(request.url.length)
 	console.log(querystring.parse(request.url));
 	timesVisited++;
 	var commentsString = createCommentString()
