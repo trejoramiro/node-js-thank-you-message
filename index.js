@@ -38,6 +38,6 @@ http.createServer(function (request, response) {
 	var htmlString = 'Number of visitors to this site: ' + timesVisited + '<br>' + '<iframe src="//giphy.com/embed/l46CvHYDDsOocpRjq" width="480" height="268" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="http://giphy.com/gifs/colbertlateshow-the-late-show-with-stephen-colbert-l46CvHYDDsOocpRjq">via GIPHY</a></p>' + commentForm
 	response.writeHead(200, {'Content-Type': 'text/html'});
 	response.end(htmlString);
-}).listen(8080);
+}).listen(process.env.PORT || 8080);
 
 console.log("Server started");
