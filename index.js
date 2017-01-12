@@ -18,11 +18,11 @@ function addComment(comment) {
 };
 
 function createCommentString() {
-	var commentListString = '<ul>';
+	var commentListString = '';
 	for(var i = 0; i < comments.length; i++) {
-			commentListString += '<li>' + comments[i]['message'] + '<br><i>' +  comments[i]['time'] + '</i> </li><br>';
+			commentListString += comments[i]['message'] + '<br><i>' +  comments[i]['time'] + '</i> </li><br><br>';
 	}
-	commentListString += '</ul><br>';
+	commentListString += '<br>';
 	return commentListString;
 };
 
@@ -35,8 +35,8 @@ http.createServer(function (request, response) {
 	timesVisited++;
 	var thankYouMessage = '';
 	var commentsString = createCommentString();
-	var commentForm = commentsString + '<form action=""> Feel free to drop a comment: <br> <textarea name="message" rows="4" cols="50"></textarea><br><input type="submit" value="Post"></form> ';
-	var htmlString = '<iframe src="//giphy.com/embed/l0K4m0mzkJDAIdhHW" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="http://giphy.com/gifs/thisisgiphy-reaction-audience-l0K4m0mzkJDAIdhHW">via GIPHY</a></p>' + commentForm + '<br> Number of http calls made to this site: ' + timesVisited;
+	var commentForm = commentsString + '<form action="">Feel free to drop a comment: <br> <textarea name="message" rows="4" cols="50"></textarea><br><input type="submit" value="Post"></form> ';
+	var htmlString = '<center>' + thankYouMessage + process.env.TIMES + '<iframe src="//giphy.com/embed/l0K4m0mzkJDAIdhHW" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="http://giphy.com/gifs/thisisgiphy-reaction-audience-l0K4m0mzkJDAIdhHW">via GIPHY</a></p>' + commentForm + '<br><h3> Number of http calls made to this site:</h3>' + timesVisited + '</center>';
 	response.writeHead(200, {'Content-Type': 'text/html'});
 	response.end(htmlString);
 }).listen(process.env.PORT || 8080);
