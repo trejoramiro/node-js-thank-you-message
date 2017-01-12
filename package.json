@@ -19,5 +19,7 @@
   "bugs": {
     "url": "https://github.com/trejoramiro/node-js-thank-you-message-/issues"
   },
-  "homepage": "https://github.com/trejoramiro/node-js-thank-you-message-#readme"
+  "homepage": "https://github.com/trejoramiro/node-js-thank-you-message-#readme",
+  "dependencies": {
+  }
 }
