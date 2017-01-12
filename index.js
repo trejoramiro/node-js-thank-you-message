@@ -6,7 +6,7 @@ var http = require('http')
 const querystring = require('querystring');
 
 var timesVisited = 0;
-var comments = ['test'];
+var comments = [];
 
 function addComment(comment) {
 	var d = new Date();
@@ -33,9 +33,10 @@ http.createServer(function (request, response) {
 	}
 	console.log(querystring.parse(request.url));
 	timesVisited++;
-	var commentsString = createCommentString()
-	var commentForm = commentsString + '<form action=""> Feel free to drop a comment: <br> <input type="text" name="message"><br><input type="submit" value="Post"></form> '
-	var htmlString = 'Number of visitors to this site: ' + timesVisited + '<br>' + '<iframe src="//giphy.com/embed/l46CvHYDDsOocpRjq" width="480" height="268" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="http://giphy.com/gifs/colbertlateshow-the-late-show-with-stephen-colbert-l46CvHYDDsOocpRjq">via GIPHY</a></p>' + commentForm
+	var thankYouMessage = '';
+	var commentsString = createCommentString();
+	var commentForm = commentsString + '<form action=""> Feel free to drop a comment: <br> <textarea name="message" rows="4" cols="50"></textarea><br><input type="submit" value="Post"></form> ';
+	var htmlString = '<iframe src="//giphy.com/embed/l0K4m0mzkJDAIdhHW" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="http://giphy.com/gifs/thisisgiphy-reaction-audience-l0K4m0mzkJDAIdhHW">via GIPHY</a></p>' + commentForm + '<br> Number of http calls made to this site: ' + timesVisited;
 	response.writeHead(200, {'Content-Type': 'text/html'});
 	response.end(htmlString);
 }).listen(process.env.PORT || 8080);
